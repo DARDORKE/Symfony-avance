@@ -28,7 +28,7 @@ class EmployeeController extends AbstractController
         $entityManager = $doctrine->getManager();
         $repository = $entityManager->getRepository(Employee::class);
 
-        $employee = $repository->findOneByUsername('mado');
+        $employee = $repository->findOneByUsernameWithDQL('mado');
 
         if (!$employee) {
             return new Response('Je n\'ai retrouvé personne...');
