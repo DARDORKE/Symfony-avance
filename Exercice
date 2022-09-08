@@ -1,17 +1,5 @@
-Pour que nous partions des mêmes bases, voici les entités sur lesquelles nous allons
-travailler pour cet exercice et ceux à venir.
+Il n'a pas été possible de créer la tâche, car il est nécessaire d'y associer un projet.
 
-Il s'agit d'une entité Projet et d'une entité Task,
-qui pourraient par exemple s'intégrer dans un outil de gestion de projet.
+Faites en sorte, lors de la création d'une nouvelle tâche, de créer un nouveau projet et de persister ces deux éléments.
 
-Un projet possède un titre et une description.
-
-Une tâche possède également un titre et une description.
-
-Un projet comportera plusieurs tâches, mais une tâche ne peut être rattachée qu'à un seul projet.
-
-N'oubliez pas de jouer la migration avant de commencer l'exercice !
-
-Modifiez la fonction createProject, créez un nouvel objet Project et persistez-le en base de données.
-
-Récupérez la solution de la première question. Vous disposez d'une méthode permettant de créer une nouvelle tâche. Si vous essayez d'accéder à cette URL, vous rencontrerez une erreur.
+Ajoutez les annotations nécessaires à l'entité Task.
