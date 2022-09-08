@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Entity\Task;
+use App\Repository\TaskRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,5 +49,13 @@ class TaskController extends AbstractController
         $entityManger->flush();
 
         return new Response(sprintf('Tâche %s créée', $task->getTitle()));
+    }
+    #[Route("/count-tasks")]
+    public function countTasks(TaskRepository $taskRepository): Response
+    {
+        
+        $tasks = $taskRepository->findAll();
+
+        return new Response(sprintf('%s tâches existantes', count($tasks)));
     }
 }
