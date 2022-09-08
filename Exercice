@@ -1,33 +1,7 @@
-Assurez-vous de disposer du code de l'exercice précédent.
+À l'aide du QueryBuilder, réécrivez le fonctionnement de la méthode findAll()
+dans une nouvelle méthode intitulée findAllWithQB() au sein de EmployeeRepository.
 
-Vous disposez également du Repository de la classe Task précédemment créée.
+Cette méthode permettra de récupérer l'ensemble des employés.
 
-<?php
-
-namespace App\Repository;
-
-use App\Entity\Task;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
-
-/**
- * @method Task|null find($id, $lockMode = null, $lockVersion = null)
- * @method Task|null findOneBy(array $criteria, array $orderBy = null)
- * @method Task[]    findAll()
- * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class TaskRepository extends ServiceEntityRepository
-{
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Task::class);
-    }
-}
-
-Au sein de votre contrôleur, mettez en place une nouvelle route intitulée
-/count-tasks, permettant de compter le nombre total de tâches.
-
-À l'aide du ParamConverter, mettez en place une route intitulée /find-task permettant de
-retrouver une tâche par son identifiant.
-
-Le titre de la tâche sera affiché dans la réponse.
+Vous pouvez vous aider de la route count-employees pour vérifier votre code,
+ainsi que des exemples commentés dans le Repository.
