@@ -53,9 +53,10 @@ class TaskController extends AbstractController
     #[Route("/count-tasks")]
     public function countTasks(TaskRepository $taskRepository): Response
     {
-        
+
         $tasks = $taskRepository->findAll();
 
         return new Response(sprintf('%s tâches existantes', count($tasks)));
     }
+
 }

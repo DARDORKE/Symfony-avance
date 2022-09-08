@@ -26,3 +26,8 @@ class TaskRepository extends ServiceEntityRepository
 
 Au sein de votre contrôleur, mettez en place une nouvelle route intitulée
 /count-tasks, permettant de compter le nombre total de tâches.
+
+À l'aide du ParamConverter, mettez en place une route intitulée /find-task permettant de
+retrouver une tâche par son identifiant.
+
+Le titre de la tâche sera affiché dans la réponse.
