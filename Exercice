@@ -1,7 +1,7 @@
-À l'aide du QueryBuilder, réécrivez le fonctionnement de la méthode findAll()
-dans une nouvelle méthode intitulée findAllWithQB() au sein de EmployeeRepository.
+À l'aide du QueryBuilder, écrivez une méthode permettant de récupérer
+un employé par son username, intitulée findOneByUsername() au sein de EmployeeRepository.
 
-Cette méthode permettra de récupérer l'ensemble des employés.
+Cette méthode permettra de récupérer en employé ou un résultat vide.
 
-Vous pouvez vous aider de la route count-employees pour vérifier votre code,
+Vous pouvez vous aider de la route find-user pour vérifier votre code,
 ainsi que des exemples commentés dans le Repository.
