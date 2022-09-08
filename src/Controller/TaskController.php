@@ -59,4 +59,9 @@ class TaskController extends AbstractController
         return new Response(sprintf('%s tâches existantes', count($tasks)));
     }
 
+    #[Route("/find-task/{id}")]
+    public function findTask(Task $task)
+    {
+        return new Response('Titre de la tache :'.$task->getTitle());
+    }
 }
