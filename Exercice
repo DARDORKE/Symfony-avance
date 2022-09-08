@@ -1,0 +1,15 @@
+Pour que nous partions des mêmes bases, voici les entités sur lesquelles nous allons
+travailler pour cet exercice et ceux à venir.
+
+Il s'agit d'une entité Projet et d'une entité Task,
+qui pourraient par exemple s'intégrer dans un outil de gestion de projet.
+
+Un projet possède un titre et une description.
+
+Une tâche possède également un titre et une description.
+
+Un projet comportera plusieurs tâches, mais une tâche ne peut être rattachée qu'à un seul projet.
+
+N'oubliez pas de jouer la migration avant de commencer l'exercice !
+
+Modifiez la fonction createProject, créez un nouvel objet Project et persistez-le en base de données.
