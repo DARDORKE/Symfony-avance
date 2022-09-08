@@ -63,6 +63,12 @@ class EmployeeRepository extends ServiceEntityRepository
 
     public function findAllWithDQL()
     {
-
+    return $this->_em
+        ->createQuery('
+        SELECT e
+        FROM App\Entity\Employee e
+    ')
+        ->getResult()
+        ;
     }
 }
