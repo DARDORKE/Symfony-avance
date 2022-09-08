@@ -1,6 +1,6 @@
-À l'aide d'une requête DQL, réécrivez le fonctionnement de la méthode findAllWithQB()dans une nouvelle
-méthode intitulée findAllWithDQL()au sein de EmployeeRepository.
+À l'aide d'une requête DQL, réécrivez une méthode findOneByUsernameWithDQL() basée sur la méthode
+findOneByUsername() au sein de EmployeeRepository.
 
-Cette méthode permettra de récupérer l'ensemble des employés.
+Cette méthode permettra de récupérer un employé ou un résultat vide.
 
-Vous pouvez modifier et vous aider de la route count-employees pour vérifier votre code.
+Vous pouvez adapter et vous aider de la route find-user pour vérifier votre code.
