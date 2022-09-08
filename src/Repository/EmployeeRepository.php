@@ -60,4 +60,9 @@ class EmployeeRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findAllWithDQL()
+    {
+
+    }
 }

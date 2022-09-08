@@ -17,7 +17,7 @@ class EmployeeController extends AbstractController
         $entityManager = $doctrine->getManager();
         $repository = $entityManager->getRepository(Employee::class);
 
-        $employees = $repository->findAllWithQB();
+        $employees = $repository->findAllWithDQL();
 
         return new Response(sprintf('%s employés existants', count($employees)));
     }
