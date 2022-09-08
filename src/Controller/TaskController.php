@@ -37,6 +37,13 @@ class TaskController extends AbstractController
         $task->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
         incididunt ut labore et dolore magna aliqua');
 
+        $project = new Project();
+        $project->setTitle('Titre du projet #2');
+        $project->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+        incididunt ut labore et dolore magna aliqua');
+
+        $task->setProject($project);
+
         $entityManger->persist($task);
         $entityManger->flush();
 
