@@ -13,3 +13,5 @@ Un projet comportera plusieurs tâches, mais une tâche ne peut être rattachée
 N'oubliez pas de jouer la migration avant de commencer l'exercice !
 
 Modifiez la fonction createProject, créez un nouvel objet Project et persistez-le en base de données.
+
+Récupérez la solution de la première question. Vous disposez d'une méthode permettant de créer une nouvelle tâche. Si vous essayez d'accéder à cette URL, vous rencontrerez une erreur.
