@@ -28,12 +28,12 @@ class EmployeeController extends AbstractController
         $entityManager = $doctrine->getManager();
         $repository = $entityManager->getRepository(Employee::class);
 
-        $employee = $repository->findOneByUsername('jdoe');
+        $employee = $repository->findOneByUsername('mado');
 
         if (!$employee) {
             return new Response('Je n\'ai retrouvé personne...');
         }
 
-        return new Response(sprintf('J\'a retrouvé %s %s', $employee->getFirstName(), $employee->getLastName()));
+        return new Response(sprintf('J\'ai retrouvé %s %s', $employee->getFirstName(), $employee->getLastName()));
     }
 }
