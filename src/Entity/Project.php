@@ -25,9 +25,13 @@ class Project
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Task::class, orphanRemoval: true)]
     private Collection $tasks;
 
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectAction::class)]
+    private Collection $actions;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->actions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,6 +87,36 @@ class Project
             // set the owning side to null (unless already changed)
             if ($task->getProject() === $this) {
                 $task->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProjectAction>
+     */
+    public function getActions(): Collection
+    {
+        return $this->actions;
+    }
+
+    public function addAction(ProjectAction $action): self
+    {
+        if (!$this->actions->contains($action)) {
+            $this->actions->add($action);
+            $action->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAction(ProjectAction $action): self
+    {
+        if ($this->actions->removeElement($action)) {
+            // set the owning side to null (unless already changed)
+            if ($action->getProject() === $this) {
+                $action->setProject(null);
             }
         }
 
