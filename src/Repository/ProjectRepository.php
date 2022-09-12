@@ -39,6 +39,15 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAvailableProjects()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.isArchived = :isArchived')
+            ->setParameter('isArchived', false)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 //    /**
 //     * @return Project[] Returns an array of Project objects
 //     */

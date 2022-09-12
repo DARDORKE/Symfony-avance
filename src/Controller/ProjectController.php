@@ -19,7 +19,7 @@ class ProjectController extends AbstractController
     public function index(ProjectRepository $projectRepository): Response
     {
         return $this->render('project/index.html.twig', [
-            'projects' => $projectRepository->findAll(),
+            'projects' => $projectRepository->findAvailableProjects(),
         ]);
     }
 
@@ -67,7 +67,6 @@ class ProjectController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $doctrine->getManager();
-            $projectRepository->add($project, true);
 
             $action = new ProjectAction();
             $action->setDescription('Mise à jour du projet');

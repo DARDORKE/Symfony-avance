@@ -28,6 +28,9 @@ class Project
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectAction::class, cascade: ["persist", "remove"])]
     private Collection $actions;
 
+    #[ORM\Column]
+    private ?bool $isArchived = null;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -119,6 +122,18 @@ class Project
                 $action->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isIsArchived(): ?bool
+    {
+        return $this->isArchived;
+    }
+
+    public function setIsArchived(bool $isArchived): self
+    {
+        $this->isArchived = $isArchived;
 
         return $this;
     }
