@@ -1,27 +1,21 @@
-Au sein du contrôleur TaskController, vous disposez de cette méthode :
+Vous disposez du contrôleur suivant :
 
 <?php
 
 namespace App\Controller;
 
-use App\Entity\Project;
-use App\Entity\Task;
+use App\Entity\Employee;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TaskController extends AbstractController
+class EmployeeController extends AbstractController
 {
-    /**
-     * @Route("/assign-task/{task_id}/{employee_id}")
-     *
-     * @Entity("task", expr="repository.find(task_id)")
-     * @Entity("employee", expr="repository.find(employee_id)")
-     */
-    public function assignTaskToEmployee(Task $task, Employee $employee)
-    {
 
-    }
 }
 
-Complétez-la afin de permettre d'assigner l'employé à la tâche donnée en paramètre.
+
+Écrivez une méthode removeEmployee accessible via la route /remove-employee/{id} permettant la
+suppression d'un employé.
+
+Les tâches d'un employé seront supprimées en cascade lorsque celui-ci sera supprimé.
