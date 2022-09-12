@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Employee;
+use App\Repository\EmployeeRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,30 +10,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EmployeeController extends AbstractController
 {
-
-    #[Route("/count-employees")]
-    public function countEmployees(ManagerRegistry $doctrine): Response
+    #[Route('/remove-employee/{id}')]
+    public function removeEmployee(int $id, EmployeeRepository $employeeRepository, ManagerRegistry $doctrine)
     {
         $entityManager = $doctrine->getManager();
-        $repository = $entityManager->getRepository(Employee::class);
 
-        $employees = $repository->findAllWithDQL();
+        $employee = $employeeRepository->find($id);
 
-        return new Response(sprintf('%s employés existants', count($employees)));
-    }
-
-    #[Route("/find-user")]
-    public function findUser(ManagerRegistry $doctrine): Response
-    {
-        $entityManager = $doctrine->getManager();
-        $repository = $entityManager->getRepository(Employee::class);
-
-        $employee = $repository->findOneByUsernameWithDQL('mado');
-
-        if (!$employee) {
-            return new Response('Je n\'ai retrouvé personne...');
+        if ($employee === null){
+            return new Response("L'utilisateur n'existe pas");
+        } else {
+            $entityManager->remove($employee);
+            $entityManager->flush();
         }
 
-        return new Response(sprintf('J\'ai retrouvé %s %s', $employee->getFirstName(), $employee->getLastName()));
+        return new Response('L\'employé à été supprimé');
     }
 }

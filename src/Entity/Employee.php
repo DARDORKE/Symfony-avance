@@ -24,8 +24,8 @@ class Employee
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
-    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Task::class)]
-    private Collection $tasks;
+    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Task::class, cascade: ["remove"])]
+    private ArrayCollection $tasks;
 
     public function __construct()
     {
