@@ -25,7 +25,7 @@ class Project
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Task::class, orphanRemoval: true)]
     private Collection $tasks;
 
-    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectAction::class)]
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectAction::class, cascade: ["persist", "remove"])]
     private Collection $actions;
 
     public function __construct()

@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\ProjectAction;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,14 +24,23 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/new', name: 'app_project_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProjectRepository $projectRepository): Response
+    public function new(Request $request, ProjectRepository $projectRepository, ManagerRegistry $doctrine): Response
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $projectRepository->add($project, true);
+            $entityManager = $doctrine->getManager();
+
+            $action = new ProjectAction();
+            $action->setDescription('Création du projet');
+            $action->setCreatedAt(new \DateTime());
+            $project->addAction($action);
+
+            $entityManager->persist($project);
+
+            $entityManager->flush();
 
             return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -49,13 +60,20 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_project_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Project $project, ProjectRepository $projectRepository): Response
+    public function edit(Request $request, Project $project, ProjectRepository $projectRepository, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
             $projectRepository->add($project, true);
+
+            $action = new ProjectAction();
+            $action->setDescription('Mise à jour du projet');
+            $action->setCreatedAt(new \DateTime());
+            $project->addAction($action);
+            $entityManager->flush();
 
             return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
         }
