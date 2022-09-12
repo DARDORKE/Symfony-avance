@@ -1,9 +1,12 @@
-Lorsque l'on crée un nouveau projet, on souhaite qu'une nouvelle action soit créée,
-associée au projet et enregistrée systématiquement. Il en va de même pour la modification.
+On souhaite pouvoir indiquer qu'un projet est archivé.
 
-Le champ "description" prendra la valeur de l'action effectuée, à savoir "Création du projet" ou
-"Modification du projet".
+Mettez à jour l'entité Project pour y ajouter une propriété isArchived avec la migration de base de données nécessaire.
 
-Lorsqu'un projet sera supprimé, les actions associées le seront également.
+Une fois cette mise à jour effectuée, jouez les commandes ci-dessous.
 
-Modifiez le fichier Twig permettant de visualiser un projet pour que ces actions soient visualisables.
+Lorsque l'on accède à la route /project, faites en sorte de n'afficher que les projets qui ne sont pas archivés, en créant
+une nouvelle méthode dans le repository de cette entité.
+
+bin/console doctrine:query:sql "INSERT INTO project VALUES (null, 'Archived project', null, 1);"
+bin/console doctrine:query:sql "INSERT INTO project VALUES (null, 'Archived project 2', null, 1);"
+bin/console doctrine:query:sql "INSERT INTO project VALUES (null, 'Archived project 3', null, 1);"
