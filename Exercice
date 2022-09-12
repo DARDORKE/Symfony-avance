@@ -1,10 +1,9 @@
-On souhaite conserver un historique de l'ensemble des actions effectuées sur un projet,
-lorsque celui-ci est créé et lorsqu'il est modifié.
+Lorsque l'on crée un nouveau projet, on souhaite qu'une nouvelle action soit créée,
+associée au projet et enregistrée systématiquement. Il en va de même pour la modification.
 
-À l'aide de la commande make:entity, créez une nouvelle entité intitulée ProjectAction.
-Celle-ci comportera deux champs, une description (text) et une date de création (datetime).
+Le champ "description" prendra la valeur de l'action effectuée, à savoir "Création du projet" ou
+"Modification du projet".
 
-Modifiez également l'entité Project à l'aide de la commande make:entity
-pour y ajouter une propriété actions qui sera une relation en lien avec ProjectAction (OneToMany)
+Lorsqu'un projet sera supprimé, les actions associées le seront également.
 
-N'oubliez pas de générer une migration et de la jouer.
+Modifiez le fichier Twig permettant de visualiser un projet pour que ces actions soient visualisables.
