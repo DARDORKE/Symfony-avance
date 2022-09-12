@@ -1,5 +1,10 @@
-À l'aide de la commande identifiée précédemment, générez un CRUD pour l'entité Project.
+On souhaite conserver un historique de l'ensemble des actions effectuées sur un projet,
+lorsque celui-ci est créé et lorsqu'il est modifié.
 
-À ce stade, vous disposez désormais de tout le nécessaire pour effectuer du CRUD sur toutes les entités créées au long de ce cours.
+À l'aide de la commande make:entity, créez une nouvelle entité intitulée ProjectAction.
+Celle-ci comportera deux champs, une description (text) et une date de création (datetime).
 
-N'hésitez pas à parcourir les pages mises à disposition !
+Modifiez également l'entité Project à l'aide de la commande make:entity
+pour y ajouter une propriété actions qui sera une relation en lien avec ProjectAction (OneToMany)
+
+N'oubliez pas de générer une migration et de la jouer.
