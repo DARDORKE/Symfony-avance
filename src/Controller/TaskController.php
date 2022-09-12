@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Project;
-use App\Entity\Task;
+use App\Repository\EmployeeRepository;
 use App\Repository\TaskRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,56 +11,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
 {
-    #[Route('/create-project')]
-    public function createProject(ManagerRegistry $doctrine): Response
+    #[Route("/assign-task/{task_id}/{employee_id}")]
+    public function assignTaskToEmployee(int $task_id, int $employee_id, ManagerRegistry $doctrine, TaskRepository $taskRepository, EmployeeRepository $employeeRepository): Response
     {
         $entityManager = $doctrine->getManager();
 
-        $project = new Project();
-        $project->setTitle('Titre du projet');
-        $project->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-        incididunt ut labore et dolore magna aliqua');
+        $task = $taskRepository->find($task_id);
+        $employee = $employeeRepository->find($employee_id);
 
-        $entityManager->persist($project);
+        $task->setEmployee($employee);
+
         $entityManager->flush();
 
-        return new Response(sprintf('Projet %s créé', $project->getTitle()));
-    }
-
-    #[Route('/create-task')]
-    public function createTask(ManagerRegistry $doctrine): Response
-    {
-        $entityManger  = $doctrine->getManager();
-
-        $task = new Task();
-        $task->setTitle('Titre de la tâche');
-        $task->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-        incididunt ut labore et dolore magna aliqua');
-
-        $project = new Project();
-        $project->setTitle('Titre du projet #2');
-        $project->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-        incididunt ut labore et dolore magna aliqua');
-
-        $task->setProject($project);
-
-        $entityManger->persist($task);
-        $entityManger->flush();
-
-        return new Response(sprintf('Tâche %s créée', $task->getTitle()));
-    }
-    #[Route("/count-tasks")]
-    public function countTasks(TaskRepository $taskRepository): Response
-    {
-
-        $tasks = $taskRepository->findAll();
-
-        return new Response(sprintf('%s tâches existantes', count($tasks)));
-    }
-
-    #[Route("/find-task/{id}")]
-    public function findTask(Task $task)
-    {
-        return new Response('Titre de la tache :'.$task->getTitle());
+        return new Response(sprintf('La tâche : %s a été assignée à %s', $task->getTitle(), $employee->getUsername()));
     }
 }
