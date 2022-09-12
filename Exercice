@@ -117,3 +117,9 @@ C'est-à-dire que cette commande gérera à la fois les routes permettant d'effe
 les actions, mais aussi les formulaires et vues associés.
 
 Dans un premier temps, identifiez cette commande et son fonctionnement.
+
+
+La commande est la suivante : bin/console make:crud.
+
+Cette fonction prend en argument direct le nom d'une entité : s'il n'est pas donné,
+celle-ci vous le demandera de façon interactive.
