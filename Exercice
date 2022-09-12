@@ -1,21 +1,119 @@
-Vous disposez du contrôleur suivant :
+Il est temps de découvrir l'étendue des pouvoirs de Symfony Maker.
+
+Voici les entités que nous avons utilisées dans les exercices du module et qui
+vous seront utiles ici. Si ce n'est pas fait, récupérez-les.
+Supprimez également tous les contrôleurs que nous avons créés jusque là.
+
+Assurez-vous que votre base de données est à jour.
 
 <?php
 
-namespace App\Controller;
+namespace App\Entity;
 
-use App\Entity\Employee;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
-class EmployeeController extends AbstractController
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
+ */
+class Project
 {
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="project", orphanRemoval=true)
+     */
+    private $tasks;
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+            // set the owning side to null (unless already changed)
+            if ($task->getProject() === $this) {
+                $task->setProject(null);
+            }
+        }
+
+        return $this;
+    }
 }
 
+Symfony Maker est un outil très complet. Les commandes mises à disposition sont puissantes et
+permettent un gain de temps considérable lors du développement d'une application.
 
-Écrivez une méthode removeEmployee accessible via la route /remove-employee/{id} permettant la
-suppression d'un employé.
+L'une de ces commandes permet notamment de générer pour une entité ce que l'on appelle un CRUD,
+pour Create Read Update Delete.
 
-Les tâches d'un employé seront supprimées en cascade lorsque celui-ci sera supprimé.
+C'est-à-dire que cette commande gérera à la fois les routes permettant d'effectuer toutes
+les actions, mais aussi les formulaires et vues associés.
+
+Dans un premier temps, identifiez cette commande et son fonctionnement.

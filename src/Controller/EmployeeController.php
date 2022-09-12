@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EmployeeController extends AbstractController
 {
     #[Route('/remove-employee/{id}')]
-    public function removeEmployee(int $id, EmployeeRepository $employeeRepository, ManagerRegistry $doctrine)
+    public function removeEmployee(int $id, EmployeeRepository $employeeRepository, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
 
